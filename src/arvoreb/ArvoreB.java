@@ -31,7 +31,7 @@ class ArvoreB {
     }
 
     public void remove(int chave) {
-        raiz.remove(chave,raiz);
+        raiz.remove(chave,raiz,false);
     }
 
     public void setOrdem(int ordem) {
