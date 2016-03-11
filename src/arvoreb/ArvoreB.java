@@ -34,6 +34,10 @@ class ArvoreB {
         raiz.buscar(chave,raiz,false);
     }
 
+    public void remover(int chave){
+        raiz.remover(chave,raiz);
+    }
+
     public void setOrdem(int ordem) {
         raiz.setOrdem(ordem);
     }

@@ -21,6 +21,7 @@ class NoArvoreB {
     boolean folha; // Indica se o nó é folha
     int ordem;     // ordem da árvore
     int totalChaves;  // total de chaves dentro do nó
+    int posChave;
     int chaves[];     // chaves
     NoArvoreB filhos[]; // filhos
     NoArvoreB pai;      // pai do nó
@@ -49,8 +50,19 @@ class NoArvoreB {
         return novaRaiz;
     }
 
+    public void remover(int chave,NoArvoreB no){
+        NoArvoreB noAux;
+        int pos;
 
-    public void buscar(int chave, NoArvoreB no, boolean achouChave) {
+        noAux = buscar(chave,no,false);
+        pos = noAux.posChave;
+        System.out.println("pos: "+pos);
+        System.out.println("Chave a ser Removida: "+noAux.chaves[pos]);
+
+    }
+
+
+    public NoArvoreB buscar(int chave, NoArvoreB no, boolean achouChave) {
 
         NoArvoreB noAux;
         noAux = no;
@@ -60,7 +72,11 @@ class NoArvoreB {
             System.out.println("Chaves: " + noAux.chaves[count]);
             if (noAux.chaves[count] == chave) {
                 System.out.println("Chamar Funcao de Remocao - Chave encontrada");
+                noAux.posChave = count;
+               // System.out.println(count);
+                //System.out.println(noAux.chaves[count]);
                 achouChave = true;
+
             } else if (count+1  == noAux.totalChaves && achouChave == false) {
                 pos = buscaNoChave(chave, noAux);
                 if (noAux.filhos[pos] != null) {
@@ -72,6 +88,8 @@ class NoArvoreB {
             }
             count++;
         }
+        //System.out.println("teste: "+noAux.chaves[posChave]);
+        return no.filhos[posChave];
     }
 
 

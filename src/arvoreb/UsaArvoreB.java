@@ -114,7 +114,7 @@ public class UsaArvoreB extends JFrame {
                 // arvore1.setOrdem(Integer.parseInt(ordem1.getText()));
                 //  arvore1.insere(Integer.parseInt(chave.getText()));
                 //mostraArvoreB(arvore1, saida1);
-                arvore1.buscar(Integer.parseInt(chave.getText()));
+                arvore1.remover(Integer.parseInt(chave.getText()));
                 mostraArvoreB(arvore1, saida2);
             }
         });
