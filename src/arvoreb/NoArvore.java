@@ -50,24 +50,22 @@ class NoArvoreB {
     }
 
 
-    public void remove(int chave, NoArvoreB no, boolean achouChave) {
+    public void buscar(int chave, NoArvoreB no, boolean achouChave) {
 
         NoArvoreB noAux;
-        int pos, count = 0;
-
-
         noAux = no;
+        int pos, count = 0;
 
         while (count < noAux.totalChaves && achouChave != true) {
             System.out.println("Chaves: " + noAux.chaves[count]);
             if (noAux.chaves[count] == chave) {
-                System.out.println("Chamar Funcao de Remocao - Chave no No!!");
+                System.out.println("Chamar Funcao de Remocao - Chave encontrada");
                 achouChave = true;
             } else if (count+1  == noAux.totalChaves && achouChave == false) {
                 pos = buscaNoChave(chave, noAux);
                 if (noAux.filhos[pos] != null) {
                     System.out.println("\nPosicao no Nó: " + pos);
-                    remove(chave, noAux.filhos[pos], achouChave);
+                    buscar(chave, noAux.filhos[pos], achouChave);
                 }else{
                     System.out.println("Chave nao Existe");
                 }

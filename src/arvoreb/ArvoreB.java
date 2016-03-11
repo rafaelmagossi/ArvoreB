@@ -30,8 +30,8 @@ class ArvoreB {
         if(no != null) raiz = no;
     }
 
-    public void remove(int chave) {
-        raiz.remove(chave,raiz,false);
+    public void buscar(int chave) {
+        raiz.buscar(chave,raiz,false);
     }
 
     public void setOrdem(int ordem) {

@@ -22,6 +22,7 @@ public class UsaArvoreB extends JFrame {
     JButton botaoBuscar;
     JButton botaoRemover;
     JTextArea saida1;
+    JTextArea saida2;
 
 
     /**
@@ -40,6 +41,7 @@ public class UsaArvoreB extends JFrame {
 
         }
         saida1.setText(arvore1.mostra(1));
+        //saida2.setText(arvore1.mostra(1));
         
        
         
@@ -83,7 +85,8 @@ public class UsaArvoreB extends JFrame {
                 // o usuario clicar no botao.
                 arvore1.setOrdem(Integer.parseInt(ordem1.getText()));
                 arvore1.insere(Integer.parseInt(chave.getText()));
-                mostraArvoreB(arvore1, saida1);
+                //mostraArvoreB(arvore1, saida1);
+
             }
         });
 
@@ -97,7 +100,7 @@ public class UsaArvoreB extends JFrame {
                 // arvore1.setOrdem(Integer.parseInt(ordem1.getText()));
                 //  arvore1.insere(Integer.parseInt(chave.getText()));
                 //mostraArvoreB(arvore1, saida1);
-                arvore1.remove(Integer.parseInt(chave.getText()));
+                arvore1.buscar(Integer.parseInt(chave.getText()));
             }
         });
 
@@ -111,6 +114,8 @@ public class UsaArvoreB extends JFrame {
                 // arvore1.setOrdem(Integer.parseInt(ordem1.getText()));
                 //  arvore1.insere(Integer.parseInt(chave.getText()));
                 //mostraArvoreB(arvore1, saida1);
+                arvore1.buscar(Integer.parseInt(chave.getText()));
+                mostraArvoreB(arvore1, saida2);
             }
         });
 
@@ -119,8 +124,10 @@ public class UsaArvoreB extends JFrame {
          * Cria caixa de texto para mostrar o contedo da pilha (com 20 linhas e
          * 50 colunas
          */
-        saida1 = new JTextArea(20, 55);
+        saida1 = new JTextArea(40, 30);
         saida1.setLineWrap(true);
+        saida2 = new JTextArea(40, 30);
+        saida2.setLineWrap(true);
 
 
 
@@ -159,6 +166,7 @@ public class UsaArvoreB extends JFrame {
         saidas.setLayout(new BoxLayout(saidas, BoxLayout.X_AXIS));
 
         saidas.add(saida1);
+        saidas.add(saida2);
 
 
         principal.add(saidas);
