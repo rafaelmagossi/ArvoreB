@@ -53,33 +53,52 @@ class NoArvoreB {
     public void remove(int chave, NoArvoreB no) {
 
         NoArvoreB noAux;
-        int count = 0,pos;
+        int pos;
+        boolean achouChave = false;
+
+        noAux = no;
+
+        for(int i=0;i<noAux.totalChaves;i++) {
+            System.out.println("Chaves: "+noAux.chaves[i]);
+            if (noAux.chaves[i] == chave) {
+                System.out.println("Chamar Funcao de Remocao - Chave no No!!");
+                achouChave = true;
+            }else if(i+1==noAux.totalChaves && achouChave == false){
+                pos = buscaNoChave(chave,noAux);
+                System.out.println("Posicao: "+pos);
+                remove(chave,noAux.filhos[pos]);
+            }
+        }
 
 
-                if(no.filhos[count] == null ){
-                    noAux = no.pai;
 
-                    for(int i=0;i<noAux.totalChaves;i++) {
-                        if (noAux.chaves[i] == chave) {
-                            System.out.println("Chamar Funcao de Remocao - Chave no No!!");
-                        }
-                    }
 
-                    pos = buscaNoChave(chave,noAux);
-                    System.out.println("Posicao: "+pos);
-                    buscaDentroNo(chave,noAux,pos);
 
-                }else if (chave < no.chaves[count]) {
-                    noAux = no.filhos[count];
-                    remove(chave,noAux);
-                } else if (chave > no.chaves[count]) {
-                    noAux = no.filhos[count+1];
-                    remove(chave,noAux);
-                }else{
-                    System.out.println("Chamar Funcao de Remocao - Chave no Raiz");
-                }
 
-                count++;
+//                if(no.filhos[count] == null ){
+//                    noAux = no.pai;
+
+//                    for(int i=0;i<noAux.totalChaves;i++) {
+//                        if (noAux.chaves[i] == chave) {
+//                            System.out.println("Chamar Funcao de Remocao - Chave no No!!");
+//                        }
+//                    }
+//
+//                    pos = buscaNoChave(chave,noAux);
+//                    System.out.println("Posicao: "+pos);
+//                    buscaDentroNo(chave,noAux,pos);
+//
+//                }else if (chave < no.chaves[count]) {
+//                    noAux = no.filhos[count];
+//                    remove(chave,noAux);
+//                } else if (chave > no.chaves[count]) {
+//                    noAux = no.filhos[count+1];
+//                    remove(chave,noAux);
+//                }else{
+//                    System.out.println("Chamar Funcao de Remocao - Chave no Raiz");
+//                }
+//
+//                count++;
     }
 
 

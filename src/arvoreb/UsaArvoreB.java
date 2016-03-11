@@ -35,7 +35,7 @@ public class UsaArvoreB extends JFrame {
       
 //        Insere Chaves na Arvore
        
-        for (int i = 1; i <= 25; ++i) {
+        for (int i = 1; i <= 50; ++i) {
             arvore1.insere(i);
 
         }
