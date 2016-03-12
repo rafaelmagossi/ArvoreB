@@ -52,19 +52,51 @@ class NoArvoreB {
         return novaRaiz;
     }
 
-    public void remover(int chave,NoArvoreB no){
+    public void remover(int chave,NoArvoreB noRaiz) {
         NoArvoreB noAux;
-        int pos;
+        int posChaveBusca, posRemove, chaveAux;
 
-        noAux = buscar(chave,no,false);
+        noAux = buscar(chave, noRaiz, false);
 
-        if(noAux != null) {
-            pos = noAux.posChave;
+        if (noAux != null) {
+            posChaveBusca = noAux.posChave;
             System.out.println("pos: " + pos);
-            System.out.println("Chave a ser Removida: " + noAux.chaves[pos]);
+            System.out.println("Chave a ser Removida: " + noAux.chaves[posChaveBusca]);
+
+            noAux.chaves[posChaveBusca] = 0;
+            noAux.totalChaves--;
+
+                if (naoExtrapolou()) {
+
+
+                    //System.out.println("posremove: "+posRemove);
+
+                    //System.out.println("Chave pai[" + i + "] :" + noAux.pai.chaves[posRemove-1]);
+
+                    //noAux.chaves[noAux.buscaPosicao(47)] = 47;
+                    //noAux.totalChaves ++;
+
+//                        posRemove = buscaNoChave(chave,noAux.pai);
+//
+//                        chaveAux = noAux.pai.chaves[posRemove-1];
+//                        noAux.pai.chaves[posRemove-1] = 0;
+//                        noAux.pai.filhos[posRemove] = null;
+//                        --noAux.pai.totalChaves;
+//
+//                        noAux.insereNo(chaveAux);
+
+
+                    for (int i = 0; i < noAux.totalChaves; i++) {
+                        System.out.println("Chave [" + i + "] :" + noAux.chaves[i]);
+                    }
+                }else if(extrapolou()){
+
+                }
+
         }else{
             System.out.println("Chave nao Existe");
         }
+
 
     }
 
@@ -102,15 +134,31 @@ class NoArvoreB {
 
 
 
+
+
     public void setOrdem(int ordem) {
         this.ordem = ordem;
     }
+
+
+
+
 
     private NoArvoreB insereDentroDoNo(int chave, NoArvoreB novoNo) {
         int posicao = buscaPosicao(chave);
         abreEspaco(posicao);
         chaves[posicao]=chave;
         filhos[posicao+1]=novoNo;
+        ++totalChaves;
+        if (extrapolou()) {
+            return(cisao());
+        } else return null;
+    }
+
+    private NoArvoreB insereNo(int chave) {
+        int posicao = buscaPosicao(chave);
+        abreEspaco(posicao);
+        chaves[posicao]=chave;
         ++totalChaves;
         if (extrapolou()) {
             return(cisao());
@@ -180,6 +228,14 @@ class NoArvoreB {
     private boolean extrapolou() {
         if (totalChaves > 2*ordem) return true;
         else return false;
+    }
+
+    private boolean naoExtrapolou() {
+        if (totalChaves < ordem) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

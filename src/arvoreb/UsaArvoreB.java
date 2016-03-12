@@ -35,11 +35,23 @@ public class UsaArvoreB extends JFrame {
         
       
 //        Insere Chaves na Arvore
-       
-        for (int i = 1; i <= 50; i+=3) {
-            arvore1.insere(i);
+        int []vetorChaves = {20,40,10,30,15,35,7,26,18,22,5,42,13,46,27,8,32,38,24,45,50,43};
+
+        for (int i = 0; i <= vetorChaves.length-1; ++i) {
+
+            arvore1.insere(vetorChaves[i]);
 
         }
+
+//        for (int i = 1; i <= 50; i+=3) {
+//            arvore1.insere(i);
+//
+//        }
+
+
+
+
+
         saida1.setText(arvore1.mostra(1));
         //saida2.setText(arvore1.mostra(1));
         
@@ -85,6 +97,7 @@ public class UsaArvoreB extends JFrame {
                 // o usuario clicar no botao.
                 arvore1.setOrdem(Integer.parseInt(ordem1.getText()));
                 arvore1.insere(Integer.parseInt(chave.getText()));
+                mostraArvoreB(arvore1, saida2);
                 //mostraArvoreB(arvore1, saida1);
 
             }
