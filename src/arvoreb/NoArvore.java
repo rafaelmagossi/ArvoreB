@@ -22,7 +22,9 @@ class NoArvoreB {
     int ordem;     // ordem da árvore
     int totalChaves;  // total de chaves dentro do nó
     int posChave;
+    int pos;
     int chaves[];     // chaves
+    NoArvoreB noAuxBusca;
     NoArvoreB filhos[]; // filhos
     NoArvoreB pai;      // pai do nó
 
@@ -55,41 +57,47 @@ class NoArvoreB {
         int pos;
 
         noAux = buscar(chave,no,false);
-        pos = noAux.posChave;
-        System.out.println("pos: "+pos);
-        System.out.println("Chave a ser Removida: "+noAux.chaves[pos]);
+
+        if(noAux != null) {
+            pos = noAux.posChave;
+            System.out.println("pos: " + pos);
+            System.out.println("Chave a ser Removida: " + noAux.chaves[pos]);
+        }else{
+            System.out.println("Chave nao Existe");
+        }
 
     }
 
 
     public NoArvoreB buscar(int chave, NoArvoreB no, boolean achouChave) {
 
-        NoArvoreB noAux;
-        noAux = no;
+
+
         int pos, count = 0;
 
-        while (count < noAux.totalChaves && achouChave != true) {
-            System.out.println("Chaves: " + noAux.chaves[count]);
-            if (noAux.chaves[count] == chave) {
+        while (count < no.totalChaves && achouChave != true) {
+            System.out.println("Chaves: " + no.chaves[count]);
+            if (no.chaves[count] == chave) {
                 System.out.println("Chamar Funcao de Remocao - Chave encontrada");
-                noAux.posChave = count;
-               // System.out.println(count);
-                //System.out.println(noAux.chaves[count]);
+                noAuxBusca = no;
+                noAuxBusca.posChave = count;
                 achouChave = true;
 
-            } else if (count+1  == noAux.totalChaves && achouChave == false) {
-                pos = buscaNoChave(chave, noAux);
-                if (noAux.filhos[pos] != null) {
+
+            } else if (count+1  == no.totalChaves && achouChave == false) {
+                pos = buscaNoChave(chave, no);
+                if (no.filhos[pos] != null) {
                     System.out.println("\nPosicao no Nó: " + pos);
-                    buscar(chave, noAux.filhos[pos], achouChave);
+                    buscar(chave, no.filhos[pos], achouChave);
                 }else{
-                    System.out.println("Chave nao Existe");
+                    //System.out.println("Chave nao Existe");
+                    noAuxBusca = null;
                 }
             }
             count++;
         }
         //System.out.println("teste: "+noAux.chaves[posChave]);
-        return no.filhos[posChave];
+        return noAuxBusca;
     }
 
 
