@@ -54,7 +54,8 @@ class NoArvoreB {
 
     public void remover(int chave,NoArvoreB noRaiz) {
         NoArvoreB noAux;
-        int posChaveBusca, posRemove, chaveAux;
+        NoArvoreB noAnterior;
+        int posChaveBusca, posRemove, chaveAux, totalChavesConcatenacao;
 
         noAux = buscar(chave, noRaiz, false);
 
@@ -66,30 +67,12 @@ class NoArvoreB {
             noAux.chaves[posChaveBusca] = 0;
             noAux.totalChaves--;
 
-                if (naoExtrapolou()) {
+                if (noAux.naoExtrapolou()) {
+
+                    concatena(chave,noAux);
 
 
-                    //System.out.println("posremove: "+posRemove);
-
-                    //System.out.println("Chave pai[" + i + "] :" + noAux.pai.chaves[posRemove-1]);
-
-                    //noAux.chaves[noAux.buscaPosicao(47)] = 47;
-                    //noAux.totalChaves ++;
-
-//                        posRemove = buscaNoChave(chave,noAux.pai);
-//
-//                        chaveAux = noAux.pai.chaves[posRemove-1];
-//                        noAux.pai.chaves[posRemove-1] = 0;
-//                        noAux.pai.filhos[posRemove] = null;
-//                        --noAux.pai.totalChaves;
-//
-//                        noAux.insereNo(chaveAux);
-
-
-                    for (int i = 0; i < noAux.totalChaves; i++) {
-                        System.out.println("Chave [" + i + "] :" + noAux.chaves[i]);
-                    }
-                }else if(extrapolou()){
+                }else if(noAux.extrapolou()){
 
                 }
 
@@ -119,7 +102,7 @@ class NoArvoreB {
             } else if (count+1  == no.totalChaves && achouChave == false) {
                 pos = buscaNoChave(chave, no);
                 if (no.filhos[pos] != null) {
-                    System.out.println("\nPosicao no Nó: " + pos);
+                    //System.out.println("\nPosicao no Nó: " + pos);
                     buscar(chave, no.filhos[pos], achouChave);
                 }else{
                     //System.out.println("Chave nao Existe");
@@ -132,6 +115,76 @@ class NoArvoreB {
         return noAuxBusca;
     }
 
+    public void concatena(int chave,NoArvoreB noFolha){
+
+        NoArvoreB no;
+        NoArvoreB filhoConcatenacao = null;
+        int posRemove, chaveAux, totalChavesSomaConcatenacao, totalFolhaResultante;
+        int k = 0;
+
+
+
+        posRemove = buscaNoChave(chave,noFolha.pai);
+
+
+        if(posRemove ==0){
+            filhoConcatenacao = noFolha.pai.filhos[posRemove+1];
+        }else if(posRemove == noFolha.pai.totalChaves){
+            filhoConcatenacao = noFolha.pai.filhos[posRemove-1];
+        }else if(noFolha.pai.filhos[posRemove+1] != null && noFolha.pai.filhos[posRemove-1] != null ){
+            if(noFolha.pai.filhos[posRemove+1].totalChaves < noFolha.pai.filhos[posRemove-1].totalChaves){
+                filhoConcatenacao = noFolha.pai.filhos[posRemove+1];
+            }else{
+                filhoConcatenacao = noFolha.pai.filhos[posRemove-1];
+
+            }
+        }
+
+        chaveAux = noFolha.pai.chaves[posRemove-1];
+        noFolha.insereFolha(chaveAux);
+        totalChavesSomaConcatenacao = filhoConcatenacao.totalChaves + noFolha.totalChaves;
+        totalFolhaResultante = filhoConcatenacao.totalChaves;
+
+
+        while(filhoConcatenacao.totalChaves < totalChavesSomaConcatenacao){
+
+            System.out.println(noFolha.chaves[k]);
+            filhoConcatenacao.chaves[totalFolhaResultante] = noFolha.chaves[k];
+            filhoConcatenacao.totalChaves++;
+            noFolha.chaves[k] = 0;
+            noFolha.totalChaves --;
+            k++;
+            totalFolhaResultante++;
+        }
+
+        noFolha.pai.chaves[posRemove-1] = 0;
+
+        if(filhoConcatenacao.totalChaves == 5){
+            //filhoConcatenacao.cisao();
+
+            int chaveCentral, posicaoCentral;
+            int k1 =0;
+
+
+            chaveCentral = filhoConcatenacao.elementoCentral();
+            noFolha.pai.chaves[posRemove-1] = chaveCentral;
+            posicaoCentral = filhoConcatenacao.totalChaves/2;
+            filhoConcatenacao.chaves[posicaoCentral] = 0;
+            //System.out.println("posicaoCentral: "+filhoConcatenacao.totalChaves);
+
+           while(k1 < 2 ){
+
+               noFolha.chaves[k1]= filhoConcatenacao.chaves[posicaoCentral+1];
+               noFolha.totalChaves++;
+               System.out.println("Nofolha: "+noFolha.chaves[k1]);
+               filhoConcatenacao.chaves[posicaoCentral+1] = 0;
+               posicaoCentral++;
+               filhoConcatenacao.totalChaves --;
+               k1++;
+            }
+            filhoConcatenacao.totalChaves --;
+        }
+    }
 
 
 
@@ -155,7 +208,7 @@ class NoArvoreB {
         } else return null;
     }
 
-    private NoArvoreB insereNo(int chave) {
+    private NoArvoreB insereFolha(int chave) {
         int posicao = buscaPosicao(chave);
         abreEspaco(posicao);
         chaves[posicao]=chave;
