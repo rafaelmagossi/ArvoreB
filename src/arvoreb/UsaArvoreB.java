@@ -35,6 +35,8 @@ public class UsaArvoreB extends JFrame {
         
       
 //        Insere Chaves na Arvore
+
+
         int []vetorChaves = {20,40,10,30,15,35,7,26,18,22,5,42,13,46,27,8,32,38,24,45,50,43};
 
         for (int i = 0; i <= vetorChaves.length-1; ++i) {

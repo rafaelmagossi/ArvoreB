@@ -183,7 +183,17 @@ class NoArvoreB {
                k1++;
             }
             filhoConcatenacao.totalChaves --;
+        }else if(noFolha.pai.chaves[noFolha.pai.totalChaves] == 0){
+            noFolha.pai.totalChaves--;
         }
+
+
+        if(noFolha.pai.naoExtrapolou()){
+            System.out.println("Chave Pai: "+noFolha.pai.chaves[0]);
+            //concatena(noFolha.pai.chaves[0],noFolha.pai);
+        }
+
+
     }
 
 
